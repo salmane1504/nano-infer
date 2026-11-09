@@ -1,0 +1,1 @@
+# Direct pip dependencies (torch or mlx, safetensors, tokenizers, huggingface_hub)
