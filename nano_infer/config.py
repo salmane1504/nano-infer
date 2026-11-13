@@ -37,6 +37,9 @@ class ModelConfig:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> ModelConfig:
+        # HF Qwen2 configs omit attention_bias because the architecture hardcodes it.
+        if data.get("model_type") == "qwen2":
+            data = {"attention_bias": True, **data}
         known = {f.name for f in fields(cls)}
         return cls(**{k: v for k, v in data.items() if k in known})
 
