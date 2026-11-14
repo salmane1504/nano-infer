@@ -19,6 +19,7 @@ _ALLOW_PATTERNS = [
     "model.safetensors.index.json",
     "tokenizer.json",
     "tokenizer_config.json",
+    "chat_template.jinja",
     "special_tokens_map.json",
 ]
 
