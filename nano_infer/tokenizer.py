@@ -113,3 +113,10 @@ class TokenStream:
             self._prefix, self._read = self._read, len(self._ids)
             return text[len(prefix_text) :]
         return ""
+
+    def finish(self) -> str:
+        """Flush remaining text, including an incomplete UTF-8 replacement character."""
+        prefix_text = self._tokenizer.decode(self._ids[self._prefix : self._read])
+        text = self._tokenizer.decode(self._ids[self._prefix :])
+        self._prefix = self._read = len(self._ids)
+        return text[len(prefix_text) :]
