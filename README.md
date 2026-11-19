@@ -103,6 +103,22 @@ IDs. Each request gets a fresh KV cache, and long prompts are prefilled in
 chunks (adjustable with `prefill_chunk_size`). Prompts must be nonempty and the
 requested prompt plus continuation must fit the model's context length.
 
+## Shortcuts
+
+A `Makefile` wraps the common commands. Each target calls a script in `tasks/`,
+which can also be run directly.
+
+| Command | What it does |
+| --- | --- |
+| `make setup` | `uv sync --locked --extra dev` |
+| `make test` | Run the test suite (`make test ARGS=tests/test_sampler.py` for one file) |
+| `make chat` | Interactive chat with `MODEL` (default `model_files/qwen2.5_0.5B-instruct`) |
+| `make complete PROMPT="Hello"` | Raw completion; omit `PROMPT` to read stdin |
+| `make download-model` | Download `MODEL_REPO` (default `Qwen/Qwen2.5-0.5B-Instruct`) into `MODEL` |
+| `make clean` | Remove `__pycache__` and `.pytest_cache` |
+
+Pass extra CLI options with `ARGS`, e.g. `make chat ARGS="--temperature 0.7"`.
+
 ## Tests
 
 Run `uv run --locked --extra dev python -m pytest -q` to install the development
